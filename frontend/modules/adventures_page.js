@@ -2,9 +2,12 @@
 import config from "../conf/index.js";
 
 //Implementation to extract city from query params
-function getCityFromURL(search) {
+async function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
+  // console.log(search);
+  const id = search.slice(6,);
+  return id
 
 }
 
@@ -12,13 +15,69 @@ function getCityFromURL(search) {
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+  try {
+    const res = await fetch(config.backendEndpoint+`/adventures?city=${city}`);
+    const data = await res.json()
+    return data;
+  } catch (error) {
+    return null;
+  }
+ 
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
-  // TODO: MODULE_ADVENTURES
+  // TODO: MODULE_ADVENTURESs
   // 1. Populate the Adventure Cards and insert those details into the DOM
+  // console.log(adventures);
+  for(let i = 0; i< adventures.length; i++){
+      const {category,costPerHead,currency,duration,id,image,name} = adventures[i];
+      // console.log(category,costPerHead,currency,duration,id,image,name);
+      const adventureElement = document.getElementById("data");
+      const colElement = document.createElement("div");
+      colElement.className = " col-6 col-lg-3 mb-3 position-relative";
+      const pathElement = document.createElement("a");
+      pathElement.href = `detail/?adventure=${id}`;
+      pathElement.id = id;
+
+      const activityElement = document.createElement("div");
+      activityElement.className = "activity-card";
+      
+      const activityImg = document.createElement("img");
+      activityImg.setAttribute("src",image);
+
+      const activityCategory = document.createElement("div");
+      activityCategory.className = "category-banner";
+      activityCategory.innerText = category;
+
+      const namePriceElement = document.createElement("div");
+      const nameElement = document.createElement("p");
+      nameElement.innerText = name;
+      const priceElement = document.createElement("p");
+      priceElement.innerText = "₹"+costPerHead;
+      namePriceElement.append(nameElement);
+      namePriceElement.append(priceElement);
+      namePriceElement.className = "d-flex justify-content-between flex-wrap w-100 px-2 pt-3"
+
+
+      const durationHoursElement = document.createElement("div");
+      const durationElement = document.createElement("p");
+      durationElement.innerText = "Duration";
+      const hourElement = document.createElement("p");
+      hourElement.innerText = duration+" Hours";
+      durationHoursElement.append(durationElement);
+      durationHoursElement.append(hourElement);
+      durationHoursElement.className = "d-flex justify-content-between flex-wrap w-100 px-2"
+      
+      activityElement.append(activityImg);
+      colElement.append(activityCategory);
+      activityElement.append(namePriceElement);
+      activityElement.append(durationHoursElement);
+      pathElement.append(activityElement)
+      colElement.append(pathElement);
+      adventureElement.append(colElement);
+
+  }
 
 }
 

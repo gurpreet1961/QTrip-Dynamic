@@ -75,7 +75,7 @@ function addBootstrapPhotoGallery(images) {
     const itemDiv = document.createElement("div");
     itemDiv.className = "carousel-item";
     const img = document.createElement("img");
-    img.className = "activity-card-image d-block w-100";
+    img.className = "activity-card-image d-block";
     img.src = images[i];
     
     itemDiv.append(img);

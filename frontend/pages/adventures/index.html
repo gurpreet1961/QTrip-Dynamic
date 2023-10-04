@@ -134,6 +134,7 @@
             let filteredAdventures = filterFunction(adventures, filters);
 
             //Updates the filtered adventures list to the DOM
+            
             addAdventureToDOM(filteredAdventures)
 
             // Updates the DOM with filter pills if any
@@ -146,6 +147,12 @@
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to show the selected duration filter. Use the provided input event
             // 2. Invoke saveFiltersToLocalStorage here
+            document.getElementById("data").innerText="";
+            let duration = event.target.value;
+            filters["duration"]= duration;
+            let filteredAdventures = filterFunction(adventures, filters);
+            addAdventureToDOM(filteredAdventures);
+            saveFiltersToLocalStorage(filters);
 
         }
 
@@ -154,6 +161,12 @@
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
             // 2. Invoke saveFiltersToLocalStorage here
+            document.getElementById("data").innerText="";
+            document.getElementById('duration-select').selectedIndex=0
+            filters["duration"]="";
+            let filteredAdventures = filterFunction(adventures,filters);
+            addAdventureToDOM(filteredAdventures);
+            saveFiltersToLocalStorage(filters);
 
         }
 
@@ -174,6 +187,8 @@
             generateFilterPillsAndUpdateDOM(filters);
             let filteredAdventures = filterFunction(adventures, filters);
             addAdventureToDOM(filteredAdventures);
+            saveFiltersToLocalStorage(filters);
+
 
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
@@ -187,7 +202,7 @@
             filters["category"] = [];
             let filteredAdventures = filterFunction(adventures, filters);
             addAdventureToDOM(filteredAdventures);
-
+            saveFiltersToLocalStorage(filters);
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
         }

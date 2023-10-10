@@ -4,17 +4,52 @@ import config from "../conf/index.js";
 async function fetchReservations() {
   // TODO: MODULE_RESERVATIONS
   // 1. Fetch Reservations by invoking the REST API and return them
-
-
   // Place holder for functionality to work in the Stubs
-  return null;
+  try {
+    const url = `${config.backendEndpoint}/reservations/`
+    const res = await fetch(url);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (error) {
+    return null;
+  }
 }
 
 //Function to add reservations to the table. Also; in case of no reservations, display the no-reservation-banner, else hide it.
 function addReservationToTable(reservations) {
   // TODO: MODULE_RESERVATIONS
   // 1. Add the Reservations to the HTML DOM so that they show up in the table
+  // console.log(reservations);
+  if(reservations.length>0){
+    document.getElementById("no-reservation-banner").style.display = "none";
+    document.getElementById("reservation-table-parent").style.display = "block";
+    const tableBody = document.getElementById("reservation-table");
+    for(let i = 0 ; i < reservations.length; i++){
+      const date = new Date(reservations[i].date);
+      const time=new Date(reservations[i].time);
+      const month=time.toLocaleString(undefined,{month:"long"})
+      const day=time.getDate();
+      const year=time.getFullYear();
+      const booktime=time.toLocaleString("en-IN").split(" ");
+      const row = document.createElement("tr");
+      row.innerHTML =  `
+        <td>${reservations[i].id}</td>
+        <td>${reservations[i].name}</td>
+        <td>${reservations[i].adventureName}</td>
+        <td>${reservations[i].person}</td>
+        <td>${date.toLocaleDateString("en-IN")}</td>
+        <td>${reservations[i].price}</td>
+        <td>${day} ${month} ${year}, ${booktime[1]} ${booktime[2]}</td>
+        <td id="${reservations[i].id}"><a href="../detail/?adventure=${reservations[i].adventure}"><button class="reservation-visit-button">Visit Adventure</button></a></td>
+      `;
 
+      tableBody.append(row);
+    }
+  }else{
+    document.getElementById("no-reservation-banner").style.display = "block";
+    document.getElementById("reservation-table-parent").style.display = "none";
+  }
   //Conditionally render the no-reservation-banner and reservation-table-parent
 
   /*

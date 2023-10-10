@@ -157,8 +157,7 @@ function getFiltersFromLocalStorage() {
   // Place holder for functionality to work in the Stubs
 
   let filters = JSON.parse(window.localStorage.getItem("filters"));
-  console.log(filters);
-  document.getElementById("duration-select").value = filters.duration;
+  if(filters !== null) document.getElementById("duration-select").value = filters.duration;
   return filters;
   
 }

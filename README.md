@@ -4,7 +4,7 @@
 https://gurpreetqtripdynamic.netlify.app/
 
 **About the Project:**
-Check out this industry-like project created with Crio, https://crio.do/learn/portfolio/gurpreet012guru/ME_QTRIPDYNAMIC/. Create your own project and build your tech skills just like this. Apply to build your portfolio on https://www.crio.do/
+Check out this industry-like project created with Crio, https://crio.do/learn/portfolio/gurpreet012guru/ME_QTRIPDYNAMIC/. 
 <div class=""><section class="styles_milestone__Qzjm7" id="overview"><div class="html-parser"><div><div class=""><span class="leading-relaxed "><h1>Overview</h1>
 <p>QTrip is a travel website aimed at travellers looking for a multitude of adventures in different cities.&nbsp;</p>
 <p>During the course of this project,</p>
